@@ -16,4 +16,8 @@ class MainController: Controller() {
 
     private fun getTitle(size: Int): String =
             if(size == 1) ("IVO - " + app.parameters.raw[0]) else "IVO"
+
+    fun getImageWidth(windowWidth: Double): Double {
+        return windowWidth
+    }
 }

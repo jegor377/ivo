@@ -7,10 +7,16 @@ import tornadofx.*
 class MainView : View() {
     private val controller: MainController by inject()
 
-    override val root = hbox {
-        if(controller.imagePath != null) imageview(controller.imagePath)
+    override val root = borderpane {
+        center {
+            if(controller.imagePath != null) imageview(controller.imagePath) {
+                fitWidthProperty().bind(primaryStage.widthProperty())
+                fitHeightProperty().bind(primaryStage.heightProperty())
+                isPreserveRatio = true
+            }
+        }
         style {
-            backgroundColor += Paint.valueOf("444")
+            backgroundColor += Paint.valueOf("222")
         }
     }
 
