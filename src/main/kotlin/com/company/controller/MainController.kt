@@ -24,7 +24,7 @@ class MainController: Controller() {
     ))
 
     fun getTitle(): String =
-            if(app.parameters.raw.size == 1 && imageIsFile()) ("IVO - [" + getDirEntry().path + "] MIT License Igor Santarek 2017") else "IVO MIT License Igor Santarek 2017"
+            if(app.parameters.raw.size == 1 && imageIsFile()) ("IVO 1.0 - [" + getDirEntry().path + "] MIT License Igor Santarek 2018") else "IVO 1.0 MIT License Igor Santarek 2018"
 
     private fun imageIsFile(): Boolean {
         if(app.parameters.raw.size == 1) {
