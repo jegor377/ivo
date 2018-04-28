@@ -43,9 +43,17 @@ class MainView : View() {
                                     strokeWidth = 1.5
                                     fill = Color.WHITE
                                     effect = DropShadow()
+                                    opacity = 0.0
                                 }
                                 action {
                                     controller.prevImage(imgView)
+                                    title = controller.getTitle()
+                                }
+                                onHover {
+                                    leftBtn.graphic.opacity = 1.0
+                                }
+                                onMouseExited = EventHandler<MouseEvent> {
+                                    leftBtn.graphic.opacity = 0.0
                                 }
                                 contentDisplay = ContentDisplay.GRAPHIC_ONLY
                                 setMaxSize(0.0, 0.0)
@@ -66,9 +74,17 @@ class MainView : View() {
                                     strokeWidth = 1.5
                                     fill = Color.WHITE
                                     effect = DropShadow()
+                                    opacity = 0.0
                                 }
                                 action {
                                     controller.nextImage(imgView)
+                                    title = controller.getTitle()
+                                }
+                                onHover {
+                                    rightBtn.graphic.opacity = 1.0
+                                }
+                                onMouseExited = EventHandler<MouseEvent> {
+                                    rightBtn.graphic.opacity = 0.0
                                 }
                                 contentDisplay = ContentDisplay.GRAPHIC_ONLY
                                 setMaxSize(0.0, 0.0)
@@ -130,6 +146,6 @@ class MainView : View() {
     }
 
     init {
-        title = controller.title
+        title = controller.getTitle()
     }
 }
