@@ -62,6 +62,7 @@ class MainView : View() {
                                     rotLeftBtn.graphic.opacity = 0.0
                                 }
                                 shortcut("q")
+                                tooltip("Rotate left (Q)")
                                 contentDisplay = ContentDisplay.GRAPHIC_ONLY
                                 setMaxSize(0.0, 0.0)
                                 setMinSize(0.0, 0.0)
@@ -90,6 +91,7 @@ class MainView : View() {
                                     leftBtn.graphic.opacity = 0.0
                                 }
                                 shortcut("left")
+                                tooltip("Previous image (<-)")
                                 contentDisplay = ContentDisplay.GRAPHIC_ONLY
                                 setMaxSize(0.0, 0.0)
                                 setMinSize(0.0, 0.0)
@@ -126,6 +128,7 @@ class MainView : View() {
                                     rotRightBtn.graphic.opacity = 0.0
                                 }
                                 shortcut("e")
+                                tooltip("Rotate right (E)")
                                 contentDisplay = ContentDisplay.GRAPHIC_ONLY
                                 setMaxSize(0.0, 0.0)
                                 setMinSize(0.0, 0.0)
@@ -154,6 +157,7 @@ class MainView : View() {
                                     rightBtn.graphic.opacity = 0.0
                                 }
                                 shortcut("right")
+                                tooltip("Next image (->)")
                                 contentDisplay = ContentDisplay.GRAPHIC_ONLY
                                 setMaxSize(0.0, 0.0)
                                 setMinSize(0.0, 0.0)
@@ -187,6 +191,7 @@ class MainView : View() {
                             fullscreenBtn.graphic.opacity = 0.0
                         }
                         shortcut("space")
+                        tooltip("Toggle fullscreen (SPACE)")
                         contentDisplay = ContentDisplay.GRAPHIC_ONLY
                         setMaxSize(0.0, 0.0)
                         setMinSize(0.0, 0.0)
