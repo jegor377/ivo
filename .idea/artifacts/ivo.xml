@@ -1,0 +1,26 @@
+<component name="ArtifactManager">
+  <artifact type="javafx" build-on-make="true" name="ivo">
+    <output-path>$PROJECT_DIR$/out/artifacts/ivo</output-path>
+    <properties id="javafx-properties">
+      <options>
+        <option name="appClass" value="com.company.app.MyApp" />
+        <option name="description" value="Image viewer." />
+        <option name="height" value="600" />
+        <option name="htmlPlaceholderId" value="" />
+        <option name="title" value="IVO" />
+        <option name="vendor" value="" />
+        <option name="version" value="1.0" />
+        <option name="width" value="800" />
+      </options>
+    </properties>
+    <root id="root">
+      <element id="archive" name="ivo_main.jar">
+        <element id="module-output" name="ivo_main" />
+        <element id="extracted-dir" path="$MAVEN_REPOSITORY$/no/tornado/tornadofx/1.7.12/tornadofx-1.7.12.jar" path-in-jar="/" />
+        <element id="extracted-dir" path="$USER_HOME$/.gradle/caches/modules-2/files-2.1/org.jetbrains.kotlin/kotlin-stdlib-jre7/1.2.0/ec8b969e26fbcf2265a4d1a1539c4d1d4c5af380/kotlin-stdlib-jre7-1.2.0.jar" path-in-jar="/" />
+        <element id="extracted-dir" path="$USER_HOME$/.gradle/caches/modules-2/files-2.1/org.jetbrains.kotlin/kotlin-stdlib-jre8/1.2.0/505f55b9619bbc5f5e26c77427dd24a6a441eef1/kotlin-stdlib-jre8-1.2.0.jar" path-in-jar="/" />
+        <element id="extracted-dir" path="$MAVEN_REPOSITORY$/org/jetbrains/kotlin/kotlin-stdlib/1.2.0/kotlin-stdlib-1.2.0.jar" path-in-jar="/" />
+      </element>
+    </root>
+  </artifact>
+</component>
