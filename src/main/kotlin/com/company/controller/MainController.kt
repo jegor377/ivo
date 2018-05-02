@@ -1,20 +1,13 @@
 package com.company.controller
 
+import com.company.controller.exception.*
 import com.company.model.validation.ImgExtensionValidator
 import javafx.scene.image.Image
-import javafx.scene.image.ImageView
 import tornadofx.*
 import java.io.File
 
-class MainController: Controller() {
-    private lateinit var dirEntries: Array<File>
-    private var headingImageId: Int = 0
-    val imagePath: String?
-        get() {
-            if(imageIsFile())
-                return getDirEntry().toURI().toURL().toString()
-            return null
-        }
+class MainController : Controller() {
+    private lateinit var imageFile: File
     private val validator = ImgExtensionValidator(arrayOf(
             "png",
             "bmp",
@@ -23,58 +16,58 @@ class MainController: Controller() {
             "gif"
     ))
 
-    fun getTitle(): String =
-            if(app.parameters.raw.size == 1 && imageIsFile()) ("IVO 1.0 - [" + getDirEntry().path + "] MIT License Igor Santarek 2018") else "IVO 1.0 MIT License Igor Santarek 2018"
+    val imagePath: String
+        get() = if(::imageFile.isInitialized) imageFile.toURI().toURL().toString() else throw ImageFileNotInitializedException()
+    val title: String
+        get() = if(::imageFile.isInitialized) "IVO 1.0 - [" + imageFile.path + "] MIT License Igor Santarek 2018" else "IVO 1.0 MIT License Igor Santarek 2018"
 
-    private fun imageIsFile(): Boolean {
-        if(app.parameters.raw.size == 1) {
-            return File(app.parameters.raw[0]).isFile
-        }
-        return false
-    }
-
-    private fun getDirEntry(): File {
-        if(!::dirEntries.isInitialized) {
-            loadDirEntries()
-            val file = File(app.parameters.raw[0])
-            headingImageId = dirEntries.indexOfFirst { file.name == it.name }
-        }
-        return dirEntries[headingImageId]
-    }
-
-    private fun loadDirEntries() {
-        val file = File(app.parameters.raw[0])
-        if(file.isFile) {
-            val fileDir = file.parentFile
-            dirEntries = fileDir.listFiles()
-        }
-    }
-
-    private fun forwardImageId() {
-        if(headingImageId+1 < dirEntries.size) {
-            headingImageId++
+    // O(1)
+    private fun initImageFile() {
+        if(app.parameters.raw.size>0) {
+            val filePath = app.parameters.raw[0]
+            if(filePath.isEmpty()) throw EmptyFilePathException()
+            val file = File(filePath)
+            if(!file.isFile) throw NotFilePathException()
+            if(!validator.isValid(file.extension)) throw NotValidImageFileException()
+            imageFile = file
         } else {
-            headingImageId = 0
+            throw NoAppParametersException()
         }
     }
 
-    private fun backwardImageId() {
-        if(headingImageId > 0) {
-            headingImageId--
+    private fun getImageFileDir(): File {
+        return if(::imageFile.isInitialized) imageFile.parentFile else throw ImageFileNotInitializedException()
+    }
+
+    // O(n), n - image file parent directory entries.
+    fun nextImage(): Image {
+        val dirEntries = getImageFileDir().listFiles().filter { validator.isValid(it.extension) }
+        val nextImgIndex = dirEntries.indexOfFirst { it.name == imageFile.name } + 1
+        imageFile = if(nextImgIndex < dirEntries.size) {
+            dirEntries[nextImgIndex]
         } else {
-            headingImageId = dirEntries.size-1
+            dirEntries[0]
         }
+        return Image(imagePath)
     }
 
-    fun nextImage(imgView: ImageView) {
-        forwardImageId()
-        while(!validator.isValid(getDirEntry().extension)) forwardImageId()
-        imgView.image = Image(imagePath)
+    // O(n), n - image file parent directory entries.
+    fun prevImage(): Image {
+        val dirEntries = getImageFileDir().listFiles().filter { validator.isValid(it.extension) }
+        val prevImgIndex = dirEntries.indexOfFirst { it.name == imageFile.name } - 1
+        imageFile = if(prevImgIndex >= 0) {
+            dirEntries[prevImgIndex]
+        } else {
+            dirEntries[dirEntries.size-1]
+        }
+        return Image(imagePath)
     }
 
-    fun prevImage(imgView: ImageView) {
-        backwardImageId()
-        while(!validator.isValid(getDirEntry().extension)) backwardImageId()
-        imgView.image = Image(imagePath)
+    init {
+        try {
+            initImageFile()
+        } catch(e: Exception) {
+
+        }
     }
 }

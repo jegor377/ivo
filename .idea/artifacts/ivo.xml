@@ -1,5 +1,5 @@
 <component name="ArtifactManager">
-  <artifact type="javafx" build-on-make="true" name="ivo">
+  <artifact type="javafx" name="ivo">
     <output-path>$PROJECT_DIR$/out/artifacts/ivo</output-path>
     <properties id="javafx-properties">
       <options>

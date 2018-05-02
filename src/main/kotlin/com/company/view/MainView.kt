@@ -1,6 +1,7 @@
 package com.company.view
 
 import com.company.controller.MainController
+import com.company.controller.exception.ImageFileNotInitializedException
 import javafx.event.EventHandler
 import javafx.geometry.Pos
 import javafx.scene.control.Button
@@ -23,7 +24,7 @@ class MainView : View() {
     private lateinit var rotRightBtn: Button
 
     override val root = stackpane {
-        if(controller.imagePath != null) {
+        try {
             borderpane {
                 center {
                     imgView = imageview(controller.imagePath) {
@@ -81,8 +82,8 @@ class MainView : View() {
                                     opacity = 0.0
                                 }
                                 action {
-                                    controller.prevImage(imgView)
-                                    title = controller.getTitle()
+                                    imgView.image = controller.prevImage()
+                                    title = controller.title
                                 }
                                 onHover {
                                     leftBtn.graphic.opacity = 1.0
@@ -147,8 +148,8 @@ class MainView : View() {
                                     opacity = 0.0
                                 }
                                 action {
-                                    controller.nextImage(imgView)
-                                    title = controller.getTitle()
+                                    imgView.image = controller.nextImage()
+                                    title = controller.title
                                 }
                                 onHover {
                                     rightBtn.graphic.opacity = 1.0
@@ -199,7 +200,7 @@ class MainView : View() {
                 }
             }
             alignment = Pos.TOP_LEFT
-        } else {
+        } catch(e: ImageFileNotInitializedException) {
             label("IVO") {
                 style {
                     textFill = Paint.valueOf("444")
@@ -214,6 +215,6 @@ class MainView : View() {
     }
 
     init {
-        title = controller.getTitle()
+        title = controller.title
     }
 }
