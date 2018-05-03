@@ -1,5 +1,5 @@
 package com.company.model.validation
 
-interface Validator<E> {
-    fun isValid(element: E): Boolean
+interface Validator<T> {
+    fun isValid(element: T): Boolean
 }
