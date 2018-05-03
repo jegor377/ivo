@@ -1,6 +1,6 @@
 package com.company.controller
 
-import com.company.array.refactor
+import com.company.array.copyWithChange
 import com.company.controller.exception.*
 import com.company.model.validation.ImgExtensionValidator
 import javafx.scene.image.Image
@@ -42,7 +42,7 @@ class MainController : Controller() {
     private fun initImageFileByChoose() {
         val fileChooser = FileChooser()
         fileChooser.title = "Open image"
-        fileChooser.extensionFilters.add(FileChooser.ExtensionFilter("Supported image files.", suppImageExtensions.refactor({ "*.$it" }).toList()))
+        fileChooser.extensionFilters.add(FileChooser.ExtensionFilter("Supported image files.", suppImageExtensions.copyWithChange({ "*.$it" }).toList()))
         val file = fileChooser.showOpenDialog(primaryStage)
         if(file != null) imageFile = file
     }
