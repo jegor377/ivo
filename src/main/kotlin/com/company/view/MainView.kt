@@ -7,8 +7,10 @@ import javafx.geometry.Pos
 import javafx.scene.control.Button
 import javafx.scene.control.ContentDisplay
 import javafx.scene.effect.DropShadow
+import javafx.scene.image.Image
 import javafx.scene.image.ImageView
 import javafx.scene.input.MouseEvent
+import javafx.scene.layout.BorderPane
 import javafx.scene.paint.Color
 import javafx.scene.paint.Paint
 import javafx.scene.text.FontWeight

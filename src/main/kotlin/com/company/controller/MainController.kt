@@ -25,7 +25,7 @@ class MainController : Controller() {
         get() = if(::imageFile.isInitialized) "IVO 1.0 - [" + imageFile.absoluteFile.path + "] MIT License Igor Santarek 2018" else "IVO 1.0 MIT License Igor Santarek 2018"
 
     // O(1)
-    private fun initImageFile() {
+    private fun initImageFileByProperty() {
         if(app.parameters.raw.size>0) {
             val filePath = app.parameters.raw[0]
             if(filePath.isEmpty()) throw EmptyFilePathException()
@@ -39,7 +39,7 @@ class MainController : Controller() {
     }
 
     // O(1)
-    private fun initImageFileByChoose() {
+    private fun initImageFileByDialog() {
         val fileChooser = FileChooser()
         fileChooser.title = "Open image"
         fileChooser.extensionFilters.add(FileChooser.ExtensionFilter("Supported image files.", suppImageExtensions.copyWithChange({ "*.$it" }).toList()))
@@ -80,9 +80,9 @@ class MainController : Controller() {
 
     init {
         try {
-            initImageFile()
+            initImageFileByProperty()
         } catch(e: Exception) {
-            initImageFileByChoose()
+            initImageFileByDialog()
         }
     }
 }
